@@ -8,6 +8,8 @@ export function ModalBoard({
   setModalText,
   todo,
   setTodo,
+  collectionList,
+  setCollectionList,
 }) {
   const [currentModalText, setCurrentModalText] = useState(modalText);
 
@@ -18,13 +20,19 @@ export function ModalBoard({
   }
 
   function editText() {
-    const newTodo = todo.map((el) => {
-      if (el.title === modalText) {
-        return { ...el, title: currentModalText.trim() };
-      } else return el;
-    });
-    setModalText(currentModalText);
-    setTodo(newTodo);
+    const updatedCollectionList = collectionList.map((section) => ({
+      ...section,
+      subCategories: section.subCategories.map((subCategory) => ({
+        ...subCategory,
+        tasks: subCategory.tasks.map((task) =>
+          task.title === modalText
+            ? { ...task, title: currentModalText.trim() }
+            : task
+        ),
+      })),
+    }));
+
+    setCollectionList(updatedCollectionList);
     setIsOpen(false);
   }
 

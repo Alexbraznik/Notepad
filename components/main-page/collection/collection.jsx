@@ -1,34 +1,16 @@
 import { useState } from "react";
 import { ModalCollection } from "./modal-collection";
 import { FaCheck } from "react-icons/fa6";
+import { catalog } from "../constatns";
+import clsx from "clsx";
 
-export function Collection() {
-  const catalog = [
-    {
-      name: "Раздел 1",
-      id: 555,
-      subCategories: [
-        {
-          title:
-            "Подраздел 1 | Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1Подраздел 1",
-          id: 1,
-        },
-        { title: "Подраздел 2", id: 2 },
-        { title: "Подраздел 3", id: 3 },
-      ],
-    },
-    {
-      name: "Раздел 2",
-      id: 4343,
-      subCategories: [
-        { title: "Подраздел 3", id: 1 },
-        { title: "Подраздел 4", id: 2 },
-        { title: "Подраздел 5", id: 3 },
-      ],
-    },
-  ];
-
-  const [collectionList, setCollectionList] = useState(catalog);
+export function Collection({
+  setTodo,
+  currentSubCategoriesId,
+  setCurrentSubCategoriesId,
+  collectionList,
+  setCollectionList,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalText, setModalText] = useState("");
   const [isNewSubCategories, setIsNewSubCategories] = useState(false);
@@ -36,11 +18,30 @@ export function Collection() {
 
   const [newSubCategoriesText, setNewSubCategoriesText] = useState("");
 
+  // Выбор подраздела
+  function handleSubCategorySelect(subCategoryId) {
+    const selectedTask = catalog
+      .flatMap((section) => section.subCategories)
+      .find((subCategory) => subCategory.id === subCategoryId);
+
+    if (selectedTask) {
+      setTodo(selectedTask.tasks);
+      setCurrentSubCategoriesId(subCategoryId);
+    }
+  }
+
+  // Background подраздела
+  function bgColorSubCategory(subCategoryId) {
+    setCurrentSubCategoriesId(subCategoryId);
+  }
+
+  // Удаление раздела
   function deleteSection(id) {
     const newCatalog = collectionList.filter((el) => el.id !== id);
     setCollectionList(newCatalog);
   }
 
+  // Удаление подраздела
   function deleteSubSection(sectionId, subsectionId) {
     const newCatalog = collectionList.map((section) => {
       if (sectionId === section.id) {
@@ -58,6 +59,7 @@ export function Collection() {
     const newSubCategories = {
       title: newSubCategoriesText,
       id: Date.now(),
+      tasks: [],
     };
     const updatedCollectionList = collectionList.map((section) => {
       if (
@@ -80,7 +82,7 @@ export function Collection() {
   }
 
   return (
-    <div className="bg-amber-700 w-[25%] border-r-4 border-gray-600 overflow-auto">
+    <div className="bg-amber-700 w-[25%] border-r-4 border-gray-600 overflow-auto overflow-x-hidden	">
       <div>
         <ModalCollection
           isOpen={isOpen}
@@ -98,11 +100,15 @@ export function Collection() {
         </div>
       </div>
       {collectionList.map((section) => (
-        <div key={section.id} className="flex flex-col">
+        <div
+          key={section.id}
+          className="flex flex-col"
+          onClick={() => console.log(collectionList)}
+        >
           <div className="border-b">
             <ul className="m-2 leading-4 items-center">
               <div className="flex mb-1 justify-between items-center gap-4">
-                <span className="truncate">{section.name}</span>
+                <span className="truncate h-5">{section.name}</span>
                 <div className="text-xl flex gap-3 mr-2">
                   {!isNewSubCategories && (
                     <>
@@ -125,7 +131,14 @@ export function Collection() {
               {section.subCategories.map((subsection) => (
                 <li
                   key={subsection.id}
-                  className="text-xs ml-3 flex justify-between items-center cursor-pointer"
+                  className={clsx(
+                    "text-xs ml-3 flex justify-between items-center cursor-pointer",
+                    currentSubCategoriesId === subsection.id ? "bg-red-500" : ""
+                  )}
+                  onClick={() => {
+                    handleSubCategorySelect(subsection.id),
+                      bgColorSubCategory(subsection.id);
+                  }}
                 >
                   <span className="hover:opacity-40 truncate">
                     {subsection.title}
