@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ModalCollection } from "./modal-collection";
 import { FaCheck } from "react-icons/fa6";
 import { catalog } from "../constatns";
+
 import clsx from "clsx";
 
 export function Collection({
@@ -15,6 +16,7 @@ export function Collection({
   const [modalText, setModalText] = useState("");
   const [isNewSubCategories, setIsNewSubCategories] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState(null);
+  const [activeCollectionList, setActiveCollectionList] = useState(false);
 
   const [newSubCategoriesText, setNewSubCategoriesText] = useState("");
 
@@ -82,8 +84,8 @@ export function Collection({
   }
 
   return (
-    <div className="bg-amber-700 w-[25%] border-r-4 border-gray-600 overflow-auto overflow-x-hidden	">
-      <div>
+    <div className="bg-neutral-800 w-[25%] relative border-r border-neutral-900 overflow-auto overflow-x-hidden pt-4">
+      <div className="flex justify-center">
         <ModalCollection
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -93,7 +95,7 @@ export function Collection({
           setCollectionList={setCollectionList}
         />
         <div
-          className="text-center border border-gray-600 -mr-px bg-amber-500 hover:bg-amber-300 cursor-pointer"
+          className="text-center border border-gray-600 bg-neutral-800 hover:bg-neutral-900 text-whiteText cursor-pointer w-56 p-2 shadow-md rounded border-opacity-50"
           onClick={() => setIsOpen(true)}
         >
           Создать раздел
@@ -102,7 +104,7 @@ export function Collection({
       {collectionList.map((section) => (
         <div
           key={section.id}
-          className="flex flex-col"
+          className="flex flex-col text-whiteText"
           onClick={() => console.log(collectionList)}
         >
           <div className="border-b">
@@ -133,14 +135,16 @@ export function Collection({
                   key={subsection.id}
                   className={clsx(
                     "text-xs ml-3 flex justify-between items-center cursor-pointer",
-                    currentSubCategoriesId === subsection.id ? "bg-red-500" : ""
+                    currentSubCategoriesId === subsection.id
+                      ? "bg-neutral-700 rounded"
+                      : ""
                   )}
                   onClick={() => {
                     handleSubCategorySelect(subsection.id),
                       bgColorSubCategory(subsection.id);
                   }}
                 >
-                  <span className="hover:opacity-40 truncate">
+                  <span className="hover:opacity-70 truncate p-2">
                     {subsection.title}
                   </span>
                   <span

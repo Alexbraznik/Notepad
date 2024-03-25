@@ -3,6 +3,8 @@ import { Collection } from "./collection/collection";
 import { Board } from "./board/board";
 import { catalog } from "./constatns";
 import { useState } from "react";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 export default function MainPage() {
   const [todo, setTodo] = useState(catalog[0].subCategories[0].tasks);
@@ -10,12 +12,13 @@ export default function MainPage() {
     catalog[0].subCategories[0].id
   );
   const [collectionList, setCollectionList] = useState(catalog);
+  const [activeCollectionList, setActiveCollectionList] = useState(true);
 
   return (
     <div>
       {/* <Header /> */}
       {/* h-[calc(100vh-64px) было в div ниже, добавить, если будет header */}
-      <div className="flex w-screen bg-teal-500 h-screen">
+      <div className="flex w-screen h-screen">
         <Collection
           setTodo={setTodo}
           currentSubCategoriesId={currentSubCategoriesId}

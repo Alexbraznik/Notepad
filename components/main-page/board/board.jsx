@@ -1,4 +1,4 @@
-import { cloneElement, useState } from "react";
+import { useState } from "react";
 import { TrashIcon } from "./trash-icon";
 import { ModalBoard } from "./modal-board";
 import { v4 as uuidv4 } from "uuid";
@@ -72,7 +72,7 @@ export function Board({
   }
 
   return (
-    <div className="w-full bg-yellow-300 h-full overflow-y-auto">
+    <div className="w-full bg-stone-800 h-full overflow-y-auto ">
       <ModalBoard
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -83,22 +83,22 @@ export function Board({
         collectionList={collectionList}
         setCollectionList={setCollectionList}
       />
-      <div className="flex flex-col items-center gap-1 justify-center pt-1 overflow-auto">
+      <div className="flex flex-col items-center gap-1 justify-center pt-4 overflow-auto">
         <input
           type="text"
           placeholder="Введите задачу"
-          className="w-9/12  h-8 rounded p-1"
+          className="w-9/12  h-8 rounded p-1 bg-neutral-700 text-whiteText"
           onChange={(event) => setTitle(event.target.value)}
           value={title}
         />
         <button
           onClick={() => addTodo()}
-          className="bg-green-500 hover:bg-green-400 w-40 h-8 rounded transition-colors ease-in-out"
+          className="bg-neutral-700 text-whiteText hover:bg-neutral-600 w-40 h-8 rounded transition-colors ease-in-out shadow-md"
         >
           Добавить задачу
         </button>
       </div>
-      <div className="pt-4">
+      <div className="pt-4 text-whiteText">
         {collectionList.map((section) =>
           section.subCategories.map((subCategory) =>
             subCategory.id === currentSubCategoriesId
@@ -108,7 +108,7 @@ export function Board({
                     key={task.id}
                   >
                     <div
-                      className="w-[calc(100vw-35%)] truncate  cursor-pointer hover:opacity-50"
+                      className="w-[calc(100vw-35%)] truncate cursor-pointer hover:opacity-60 py-1.5 px-3"
                       onClick={() => {
                         setIsOpen(true);
                         setModalText(task.title);
@@ -117,7 +117,7 @@ export function Board({
                       {task.title}
                     </div>
                     <TrashIcon
-                      className="hover:text-red-500 cursor-pointer transition-colors ease-in-out"
+                      className="hover:text-red-500 cursor-pointer transition-colors ease-in-out ml-5"
                       onClick={() => deleteTodo(task.id)}
                     />
                   </div>

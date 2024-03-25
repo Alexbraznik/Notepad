@@ -35,8 +35,8 @@ export const catalog = [
         title: "Подраздел 2",
         id: 2,
         tasks: [
-          { id: 3, title: "2 - 1 Купить хлеб", isCompleted: false },
-          { id: 4, title: "2 - 2 Купить молока", isCompleted: true },
+          { id: 3, title: "Купить хлеб", isCompleted: false },
+          { id: 4, title: "Купить молока", isCompleted: true },
         ],
       },
     ],
@@ -49,16 +49,16 @@ export const catalog = [
         title: "Подраздел 3",
         id: 3,
         tasks: [
-          { id: 1, title: "3 - 1 Задача 3", isCompleted: false },
-          { id: 2, title: "3 - 2 Задача 4", isCompleted: true },
+          { id: 1, title: "Задача 3", isCompleted: false },
+          { id: 2, title: "Задача 4", isCompleted: true },
         ],
       },
       {
         title: "Подраздел 4",
         id: 4,
         tasks: [
-          { id: 3, title: "4 - 1 Дописать код", isCompleted: false },
-          { id: 4, title: "5 - 2 Исправить ошибки", isCompleted: true },
+          { id: 3, title: "Дописать код", isCompleted: false },
+          { id: 4, title: "Исправить ошибки", isCompleted: true },
         ],
       },
     ],
