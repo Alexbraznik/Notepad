@@ -15,8 +15,6 @@ export function SubSection({ sectionId }) {
 
   const subSectionList = useCollection((state) => state.subSectionList);
 
-  console.log(currentSubSectionId, 'currentSubSectionId');
-
   // Устанавливаем id первого подраздела(при загрузке страницы будет он)
   useEffect(() => {
     if (!currentSubSectionId) {

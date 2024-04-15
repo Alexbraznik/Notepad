@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { enterKeyPress } from '../keyPress';
 import { useBoard } from '../store/useBoard';
 
 // Отправка задачи в boardList
@@ -7,8 +6,14 @@ export function SubmitTask() {
   const [title, setTitle] = useState(''); // текст задачи в input
 
   // Отправка задачи по нажатию на Enter
-  const buttonRef = useRef(null);
   const addTask = useBoard((state) => state.addTask);
+
+  // Локальная функция добавления задачи
+  function addNewTask(title) {
+    if (title.trim().length === 0) return;
+    addTask(title);
+    setTitle('');
+  }
 
   // Ставит автофокус на input при загрузке страницы
   const inputRef = useRef(null);
@@ -25,14 +30,14 @@ export function SubmitTask() {
         ref={inputRef}
         onChange={(event) => setTitle(event.target.value)}
         value={title}
-        onKeyDown={(event) => enterKeyPress(event, buttonRef)}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            addNewTask(title);
+          }
+        }}
       />
       <button
-        ref={buttonRef}
-        onClick={() => {
-          addTask(title);
-          setTitle('');
-        }}
+        onClick={() => addNewTask(title)}
         className="bg-neutral-700 text-whiteText hover:bg-neutral-600 w-40 h-8 rounded transition-colors ease-in-out shadow-md"
       >
         Добавить задачу

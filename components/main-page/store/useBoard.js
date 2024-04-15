@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { tasksList } from '../constatns';
 import { useIdsStorage } from './useIdsStorage';
+import uniqid from 'uniqid';
 
 // Отвечает за задачи(папка board)
 export const useBoard = create((set) => ({
@@ -11,7 +12,7 @@ export const useBoard = create((set) => ({
     set((state) => {
       const currentSubSectionId = useIdsStorage.getState().currentSubSectionId;
       const updatedTasksList = {
-        id: Date.now(),
+        id: uniqid(),
         title: title.trim(),
         isCompleted: false,
         parentId: currentSubSectionId,

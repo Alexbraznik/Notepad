@@ -1,77 +1,49 @@
 import { useEffect, useRef } from 'react';
 
-import clsx from 'clsx';
-import { enterKeyPress, escapeKeyPress } from '../keyPress';
 import { useBoard } from '../store/useBoard';
+import { Modal } from '../Modal';
 
 export function ModalBoard({ isOpen, setIsOpen, modalText, setModalText }) {
   const editTask = useBoard((state) => state.editTask); // функция редактирования задачи из store
+  const textAreaRef = useRef(null); // рефка для устанавливки фокуса в конце текста
 
-  const submitRef = useRef(null); // отправка задачи по клику на Enter
-  const textAreaFocusRef = useRef(null); // установка focus на textarea, если был клик вне textarea
-  const escapeRef = useRef(null); // закрытие модалки на Escape
-
-  // Закрытие модального окна, при клике вне его
-  const modalRef = useRef(null);
-  function closeModal(event) {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  }
   // Отображение текста в модальном окне
   useEffect(() => {
     setModalText(modalText);
   }, [isOpen]);
 
-  // Установка focus на textarea, если был клик вне textarea
-  function textAreaFocus() {
-    textAreaFocusRef.current.focus();
+  // Локальная функция редактирования текста
+  function handleEditTask() {
+    if (modalText.trim().length === 0) return;
+    editTask(modalText);
+    setIsOpen(false);
   }
+
+  // Устанавливает фокус в конце текста
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.selectionStart = textAreaRef.current.value.length;
+    }
+  }, [isOpen]);
+
   return (
-    isOpen && (
-      <div
-        className={clsx(
-          'fixed inset-0 h-full w-full bg-black/50',
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none',
-        )}
+    <Modal
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      width="w-1/2"
+      height="h-1/2"
+      insetX="inset-x-1/3"
+      insetY="inset-y-1/4"
+      buttonAgree="Редактировать"
+      buttonCancel="Закрыть"
+      onAgree={handleEditTask}
+    >
+      <textarea
+        className="resize-none overflow-auto bg-neutral-800 border border-neutral-700 border-opacity-60 scrollbar scrollbar-thumb-gray-700 w-full h-full"
+        ref={textAreaRef}
+        value={modalText}
         onChange={(event) => setModalText(event.target.value)}
-        onClick={closeModal}
-      >
-        <div
-          className="relative flex flex-col overflow-y-auto bg-neutral-800 text-whiteText h-1/2 w-1/2 text-wrap	inset-x-[35%] inset-y-[25%] p-4 "
-          ref={modalRef}
-          onKeyDown={(event) => escapeKeyPress(event, escapeRef)}
-          onClick={textAreaFocus}
-        >
-          <textarea
-            className="resize-none overflow-auto h-full bg-neutral-800 border border-neutral-700 border-opacity-60 scrollbar scrollbar-thumb-gray-700"
-            autoFocus
-            ref={textAreaFocusRef}
-            value={modalText}
-            onKeyDown={(event) => enterKeyPress(event, submitRef)}
-            onChange={(event) => setModalText(event.target.value)}
-          ></textarea>
-          <div className="mt-auto py-4 flex justify-center gap-36">
-            <button
-              className="bg-teal-700	 hover:bg-emerald-600	 text-white font-bold py-2 px-4 rounded"
-              ref={submitRef}
-              onClick={() => {
-                editTask(modalText);
-                setIsOpen(false);
-              }}
-            >
-              Редактировать
-            </button>
-            <button
-              className="bg-rose-700 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded"
-              ref={escapeRef}
-              onClick={() => setIsOpen(false)}
-            >
-              Закрыть
-            </button>
-          </div>
-        </div>
-      </div>
-    )
+      ></textarea>
+    </Modal>
   );
 }

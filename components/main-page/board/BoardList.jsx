@@ -8,6 +8,7 @@ export function BoardList({ setIsOpen, setModalText }) {
     (state) => state.currentSubSectionId,
   );
   const tasksList = useBoard((state) => state.tasksList);
+  console.log(tasksList, 'tasksList');
 
   return (
     <div className="pt-4 text-whiteText">

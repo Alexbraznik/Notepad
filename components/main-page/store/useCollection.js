@@ -1,17 +1,28 @@
 import { create } from 'zustand';
 import { sectionList, subSectionList } from '../constatns';
+import uniqid from 'uniqid';
 
 // Отвечает за разделы и подразделы(папка collection)
 export const useCollection = create((set) => ({
   sectionList: sectionList, // раздел
   subSectionList: subSectionList, // подраздел
 
+  // Создает новый раздел
+  addSection: (modalText) =>
+    set((state) => {
+      const updatedSectionList = {
+        name: modalText.trim(),
+        id: uniqid(),
+      };
+      return { sectionList: [...state.sectionList, updatedSectionList] };
+    }),
+
   // Создает новый подраздел
   addNewSubSection: (activeSectionId, newSubSectionText) =>
     set((state) => {
       const updatedSubSectionList = {
         title: newSubSectionText.trim(),
-        id: Date.now(),
+        id: uniqid(),
         parentId: activeSectionId,
       };
       if (updatedSubSectionList.title.length !== 0) {

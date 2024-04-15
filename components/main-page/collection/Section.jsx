@@ -8,6 +8,7 @@ export function Section() {
   const [activeSectionId, setActiveSectionId] = useState(null); // id активной секции
 
   const sectionList = useCollection((state) => state.sectionList);
+  console.log(sectionList, 'sectionList');
 
   return (
     <>
