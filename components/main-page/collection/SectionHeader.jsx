@@ -1,4 +1,5 @@
 import { useCollection } from '../store/useCollection';
+import { useIdsStorage } from '../store/useIdsStorage';
 
 // Название раздела
 export function SectionHeader({
@@ -6,6 +7,11 @@ export function SectionHeader({
   setActiveSectionId,
   setIsNewSubSection,
 }) {
+  const currentSectionId = useIdsStorage((state) => state.currentSectionId);
+  const setCurrentSubSectionId = useIdsStorage(
+    (state) => state.setCurrentSubSectionId,
+  );
+
   const deleteSection = useCollection((state) => state.deleteSection);
 
   return (
@@ -25,7 +31,12 @@ export function SectionHeader({
         </>
         <span
           className="hover:text-rose-500 cursor-pointer"
-          onClick={() => deleteSection(section.id)}
+          onClick={() => {
+            deleteSection(section.id);
+            if (currentSectionId === section.id) {
+              setCurrentSubSectionId(null);
+            }
+          }}
         >
           &times;
         </span>

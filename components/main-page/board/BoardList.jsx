@@ -8,21 +8,22 @@ export function BoardList({ setIsOpen, setModalText }) {
     (state) => state.currentSubSectionId,
   );
   const tasksList = useBoard((state) => state.tasksList);
-  console.log(tasksList, 'tasksList');
+  // console.log(tasksList, 'tasksList');
 
   return (
     <div className="pt-4 text-whiteText">
-      {tasksList &&
-        tasksList.map((task) =>
-          task.parentId === currentSubSectionId ? (
-            <BoardItem
-              key={task.id}
-              setIsOpen={setIsOpen}
-              setModalText={setModalText}
-              {...task}
-            />
-          ) : null,
-        )}
+      {tasksList.map((task) => {
+        if (task.parentId !== currentSubSectionId) return null;
+        return (
+          <BoardItem
+            key={task.id}
+            setIsOpen={setIsOpen}
+            setModalText={setModalText}
+            title={task.title}
+            id={task.id}
+          />
+        );
+      })}
     </div>
   );
 }

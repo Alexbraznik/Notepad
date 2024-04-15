@@ -20,6 +20,7 @@ export const useCollection = create((set) => ({
   // Создает новый подраздел
   addNewSubSection: (activeSectionId, newSubSectionText) =>
     set((state) => {
+      const c = 43;
       const updatedSubSectionList = {
         title: newSubSectionText.trim(),
         id: uniqid(),

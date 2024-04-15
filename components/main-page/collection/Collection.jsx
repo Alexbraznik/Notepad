@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useCollection } from '../store/useCollection';
+
 import { ModalAddSection } from './ModalAddSection';
 import { Section } from './Section';
 
 // Родительский элемент всей папки collection
 export function Collection() {
   const [isOpen, setIsOpen] = useState(false); // открыть-закрыть модальное окно
+  const sectionList = useCollection((state) => state.sectionList);
 
   return (
     <div className="bg-neutral-800 w-[25%] relative border-r border-neutral-900 overflow-auto overflow-x-hidden pt-4">
@@ -17,7 +20,9 @@ export function Collection() {
           Создать раздел
         </div>
       </div>
-      <Section />
+      {sectionList.map((section) => (
+        <Section key={section.id} section={section} />
+      ))}
     </div>
   );
 }
