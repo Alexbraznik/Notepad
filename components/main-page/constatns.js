@@ -14,17 +14,17 @@ export const subSectionList = [
 
 // Задачи
 export const tasksList = [
-  { id: 1, title: 'Задача 1', isCompleted: false, parentId: 1 },
-  { id: 2, title: 'Задача 2', isCompleted: false, parentId: 1 },
-  { id: 3, title: 'Задача 3', isCompleted: false, parentId: 1 },
-  { id: 4, title: 'Четвертая задача', isCompleted: false, parentId: 1 },
+  { id: 1, title: 'Задача 1', isCompleted: false, parentId: 1, sectionId: 555 },
+  { id: 2, title: 'Задача 2', isCompleted: false, parentId: 1, sectionId: 555 },
+  { id: 3, title: 'Задача 3', isCompleted: false, parentId: 1, sectionId: 555 },
+  { id: 4, title: 'Четвертая задача', isCompleted: false, parentId: 1, sectionId: 555 },
 
-  { id: 5, title: 'Купить хлеб', isCompleted: false, parentId: 2 },
-  { id: 6, title: 'Купить молока', isCompleted: true, parentId: 2 },
+  { id: 5, title: 'Купить хлеб', isCompleted: false, parentId: 2, sectionId: 555 },
+  { id: 6, title: 'Купить молока', isCompleted: true, parentId: 2, sectionId: 555 },
 
-  { id: 7, title: 'Задача 3', isCompleted: false, parentId: 3 },
-  { id: 8, title: 'Задача 4', isCompleted: true, parentId: 3 },
+  { id: 7, title: 'Задача 3', isCompleted: false, parentId: 3, sectionId: 4324 },
+  { id: 8, title: 'Задача 4', isCompleted: true, parentId: 3, sectionId: 4324 },
 
-  { id: 9, title: 'Дописать код', isCompleted: false, parentId: 4 },
-  { id: 10, title: 'Исправить ошибки', isCompleted: true, parentId: 4 },
+  { id: 9, title: 'Дописать код', isCompleted: false, parentId: 4, sectionId: 4324 },
+  { id: 10, title: 'Исправить ошибки', isCompleted: true, parentId: 4, sectionId: 4324 },
 ];

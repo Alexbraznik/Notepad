@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { sectionList, subSectionList } from '../constatns';
+import { useBoard } from './useBoard';
 import uniqid from 'uniqid';
 
 // Отвечает за разделы и подразделы(папка collection)
@@ -20,7 +21,6 @@ export const useCollection = create((set) => ({
   // Создает новый подраздел
   addNewSubSection: (activeSectionId, newSubSectionText) =>
     set((state) => {
-      const c = 43;
       const updatedSubSectionList = {
         title: newSubSectionText.trim(),
         id: uniqid(),
@@ -37,18 +37,42 @@ export const useCollection = create((set) => ({
   // Удаление раздела
   deleteSection: (sectionId) =>
     set((state) => {
+      const tasksList = useBoard.getState().tasksList;
+
       const updatedSectionList = state.sectionList.filter(
         (section) => section.id !== sectionId,
       );
-      return { sectionList: updatedSectionList };
+
+      // Удаление подраздела, если удален раздел
+      const updatedSubSectionList = state.subSectionList.filter(
+        (subSection) => subSection.parentId !== sectionId,
+      );
+
+      // Удаление задач, если удален раздел
+      const updatedTasksList = tasksList.filter((task) => task.sectionId !== sectionId);
+      useBoard.setState({ tasksList: updatedTasksList });
+
+      return {
+        sectionList: updatedSectionList,
+        subSectionList: updatedSubSectionList,
+      };
     }),
 
   // Удаление подраздела
   deleteSubSection: (subSectionId) =>
     set((state) => {
+      const tasksList = useBoard.getState().tasksList;
+
       const updatedSubSectionList = state.subSectionList.filter(
         (subSection) => subSection.id !== subSectionId,
       );
-      return { subSectionList: updatedSubSectionList };
+
+      // Удаляет задачи при удалении подраздела
+      const updatedTasksList = tasksList.filter((task) => task.parentId !== subSectionId);
+      useBoard.setState({ tasksList: updatedTasksList });
+
+      return {
+        subSectionList: updatedSubSectionList,
+      };
     }),
 }));

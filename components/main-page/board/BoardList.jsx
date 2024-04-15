@@ -4,11 +4,8 @@ import { BoardItem } from './BoardItem';
 
 // Весь список задач. Сравнивается id активного подраздела и в него добавляется задача
 export function BoardList({ setIsOpen, setModalText }) {
-  const currentSubSectionId = useIdsStorage(
-    (state) => state.currentSubSectionId,
-  );
+  const currentSubSectionId = useIdsStorage((state) => state.currentSubSectionId);
   const tasksList = useBoard((state) => state.tasksList);
-  // console.log(tasksList, 'tasksList');
 
   return (
     <div className="pt-4 text-whiteText">

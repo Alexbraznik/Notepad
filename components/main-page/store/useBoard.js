@@ -10,12 +10,15 @@ export const useBoard = create((set) => ({
   // Добавление задачи
   addTask: (title) =>
     set((state) => {
+      const currentSectionId = useIdsStorage.getState().currentSectionId;
       const currentSubSectionId = useIdsStorage.getState().currentSubSectionId;
+
       const updatedTasksList = {
         id: uniqid(),
         title: title.trim(),
         isCompleted: false,
         parentId: currentSubSectionId,
+        sectionId: currentSectionId,
       };
       if (updatedTasksList.title.trim().length !== 0) {
         return { tasksList: [...state.tasksList, updatedTasksList] };
@@ -26,9 +29,7 @@ export const useBoard = create((set) => ({
   // Удаление задачи
   deleteTask: (taskId) =>
     set((state) => {
-      const updatedTasksList = state.tasksList.filter(
-        (task) => task.id !== taskId,
-      );
+      const updatedTasksList = state.tasksList.filter((task) => task.id !== taskId);
       return { tasksList: updatedTasksList };
     }),
 

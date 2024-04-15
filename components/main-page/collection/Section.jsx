@@ -11,30 +11,17 @@ export function Section({ section }) {
   const sectionList = useCollection((state) => state.sectionList);
   const subSectionList = useCollection((state) => state.subSectionList);
 
-  const setCurrentSectionId = useIdsStorage(
-    (state) => state.setCurrentSectionId,
-  );
-  const setCurrentSubSectionId = useIdsStorage(
-    (state) => state.setCurrentSubSectionId,
-  );
-  const currentSubSectionId = useIdsStorage(
-    (state) => state.currentSubSectionId,
-  );
-  const currentSectionId = useIdsStorage((state) => state.currentSectionId);
+  const setCurrentSectionId = useIdsStorage((state) => state.setCurrentSectionId);
+  const setCurrentSubSectionId = useIdsStorage((state) => state.setCurrentSubSectionId);
+  const currentSubSectionId = useIdsStorage((state) => state.currentSubSectionId);
 
   // Устанавливаем id первого подраздела(при загрузке страницы будет он)
   useEffect(() => {
-    if (!currentSubSectionId) {
+    if (subSectionList.length > 0 && !currentSubSectionId) {
       setCurrentSubSectionId(subSectionList[0].id);
       setCurrentSectionId(sectionList[0].id);
     }
   }, []);
-
-  console.log(currentSectionId, 'currentSectionId');
-  console.log(currentSubSectionId, 'currentSubSectionId');
-
-  console.log(subSectionList, 'subSectionList');
-  console.log(sectionList, 'sectionList');
 
   return (
     <div className="flex flex-col text-whiteText">
