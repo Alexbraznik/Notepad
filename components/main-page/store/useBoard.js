@@ -20,10 +20,7 @@ export const useBoard = create((set) => ({
         parentId: currentSubSectionId,
         sectionId: currentSectionId,
       };
-      if (updatedTasksList.title.trim().length !== 0) {
-        return { tasksList: [...state.tasksList, updatedTasksList] };
-      }
-      return state;
+      return { tasksList: [...state.tasksList, updatedTasksList] };
     }),
 
   // Удаление задачи
@@ -37,7 +34,6 @@ export const useBoard = create((set) => ({
   editTask: (modalText) =>
     set((state) => {
       const currentTaskId = useIdsStorage.getState().currentTaskId;
-      if (modalText.trim().length == 0) return state;
       const updatedTasksList = state.tasksList.map((task) =>
         task.id === currentTaskId ? { ...task, title: modalText.trim() } : task,
       );

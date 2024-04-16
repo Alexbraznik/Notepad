@@ -26,12 +26,7 @@ export const useCollection = create((set) => ({
         id: uniqid(),
         parentId: activeSectionId,
       };
-      if (updatedSubSectionList.title.length !== 0) {
-        return {
-          subSectionList: [...state.subSectionList, updatedSubSectionList],
-        };
-      }
-      return state;
+      return { subSectionList: [...state.subSectionList, updatedSubSectionList] };
     }),
 
   // Удаление раздела
