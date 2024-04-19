@@ -1,11 +1,13 @@
+import { ISection, ISubSection, ITask } from './interfaces/main-interfaces';
+
 // Раздел
-export const sectionList = [
-  { name: 'Раздел 1', id: 555 },
-  { name: 'Раздел 2', id: 4324 },
+export const sectionList: ISection[] = [
+  { title: 'Раздел 1', id: 555 },
+  { title: 'Раздел 2', id: 4324 },
 ];
 
 // Подраздел
-export const subSectionList = [
+export const subSectionList: ISubSection[] = [
   { title: 'Подраздел 1', id: 1, parentId: 555 },
   { title: 'Подраздел 2', id: 2, parentId: 555 },
   { title: 'Подраздел 3', id: 3, parentId: 4324 },
@@ -13,7 +15,7 @@ export const subSectionList = [
 ];
 
 // Задачи
-export const tasksList = [
+export const tasksList: ITask[] = [
   { id: 1, title: 'Задача 1', isCompleted: false, parentId: 1, sectionId: 555 },
   { id: 2, title: 'Задача 2', isCompleted: false, parentId: 1, sectionId: 555 },
   { id: 3, title: 'Задача 3', isCompleted: false, parentId: 1, sectionId: 555 },

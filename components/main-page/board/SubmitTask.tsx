@@ -1,24 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { useBoard } from '../store/useBoard';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useBoard } from '../store';
+import { ISubmitTaskProps } from './interfaces/board-interfaces';
 
 // Отправка задачи в boardList
-export function SubmitTask() {
+export const SubmitTask: FC<ISubmitTaskProps> = () => {
   const [title, setTitle] = useState(''); // текст задачи в input
 
   // Отправка задачи по нажатию на Enter
   const addTask = useBoard((state) => state.addTask);
 
   // Локальная функция добавления задачи
-  function addNewTask(title) {
+  function addNewTask(title: string) {
     if (title.trim().length === 0) return;
     addTask(title);
     setTitle('');
   }
 
   // Ставит автофокус на input при загрузке страницы
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
 
   return (
@@ -44,4 +47,4 @@ export function SubmitTask() {
       </button>
     </div>
   );
-}
+};

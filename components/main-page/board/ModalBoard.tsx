@@ -1,11 +1,16 @@
-import { useEffect, useRef } from 'react';
-
-import { useBoard } from '../store/useBoard';
+import { FC, useEffect, useRef } from 'react';
+import { useBoard } from '../store';
 import { Modal } from '../Modal';
+import { IModalBoardProps } from './interfaces/board-interfaces';
 
-export function ModalBoard({ isOpen, setIsOpen, modalText, setModalText }) {
+export const ModalBoard: FC<IModalBoardProps> = ({
+  isOpen,
+  setIsOpen,
+  modalText,
+  setModalText,
+}) => {
   const editTask = useBoard((state) => state.editTask); // функция редактирования задачи из store
-  const textAreaRef = useRef(null); // рефка для устанавливки фокуса в конце текста
+  const textAreaRef = useRef<HTMLTextAreaElement>(null); // рефка для устанавливки фокуса в конце текста
 
   // Отображение текста в модальном окне
   useEffect(() => {
@@ -46,4 +51,4 @@ export function ModalBoard({ isOpen, setIsOpen, modalText, setModalText }) {
       ></textarea>
     </Modal>
   );
-}
+};

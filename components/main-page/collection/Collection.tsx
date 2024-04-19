@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { useCollection } from '../store/useCollection';
-
-import { ModalAddSection } from './ModalAddSection';
-import { Section } from './Section';
+import { FC, useState } from 'react';
+import { useCollection } from '../store';
+import { Section, ModalAddSection } from './index';
 
 // Родительский элемент всей папки collection
-export function Collection() {
+export const Collection: FC = () => {
   const [isOpen, setIsOpen] = useState(false); // открыть-закрыть модальное окно
   const sectionList = useCollection((state) => state.sectionList);
 
@@ -25,4 +23,4 @@ export function Collection() {
       ))}
     </div>
   );
-}
+};

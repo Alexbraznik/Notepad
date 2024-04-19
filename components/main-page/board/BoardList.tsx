@@ -1,9 +1,10 @@
-import { useBoard } from '../store/useBoard';
-import { useIdsStorage } from '../store/useIdsStorage';
-import { BoardItem } from './BoardItem';
+import { FC } from 'react';
+import { BoardItem } from './index';
+import { IBoardListProps } from './interfaces/board-interfaces';
+import { useBoard, useIdsStorage } from '../store';
 
 // Весь список задач. Сравнивается id активного подраздела и в него добавляется задача
-export function BoardList({ setIsOpen, setModalText }) {
+export const BoardList: FC<IBoardListProps> = ({ setIsOpen, setModalText }) => {
   const currentSubSectionId = useIdsStorage((state) => state.currentSubSectionId);
   const tasksList = useBoard((state) => state.tasksList);
 
@@ -23,4 +24,4 @@ export function BoardList({ setIsOpen, setModalText }) {
       })}
     </div>
   );
-}
+};

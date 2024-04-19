@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useCollection } from '../store/useCollection';
+import { FC, useEffect, useState } from 'react';
+import { useCollection } from '../store';
 import { Modal } from '../Modal';
+import { IModalAddSectionProps } from './interfaces/collection-interfaces';
 
-export function ModalAddSection({ isOpen, setIsOpen }) {
+export const ModalAddSection: FC<IModalAddSectionProps> = ({ isOpen, setIsOpen }) => {
   const [modalText, setModalText] = useState('');
 
   const addSection = useCollection((state) => state.addSection);
@@ -38,9 +39,9 @@ export function ModalAddSection({ isOpen, setIsOpen }) {
         className="bg-neutral-800 text-whiteText border border-neutral-600 text-sm rounded-lg focus:outline-none block w-full p-2.5  "
         placeholder="Введите название"
         value={modalText}
-        autoсomplete="off"
+        autoComplete="off"
         onChange={(event) => setModalText(event.target.value)}
       ></input>
     </Modal>
   );
-}
+};

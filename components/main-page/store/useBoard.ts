@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { tasksList } from '../constatns';
 import { useIdsStorage } from './useIdsStorage';
-import uniqid from 'uniqid';
+import { IBoardState } from './store-interface';
+import { ITask } from '../interfaces/main-interfaces';
 
 // Отвечает за задачи(папка board)
-export const useBoard = create((set) => ({
+export const useBoard = create<IBoardState>((set) => ({
   tasksList: tasksList, // задачи
 
   // Добавление задачи
@@ -13,12 +14,12 @@ export const useBoard = create((set) => ({
       const currentSectionId = useIdsStorage.getState().currentSectionId;
       const currentSubSectionId = useIdsStorage.getState().currentSubSectionId;
 
-      const updatedTasksList = {
-        id: uniqid(),
+      const updatedTasksList: ITask = {
+        id: Date.now(),
         title: title.trim(),
         isCompleted: false,
-        parentId: currentSubSectionId,
-        sectionId: currentSectionId,
+        parentId: currentSubSectionId as number,
+        sectionId: currentSectionId as number,
       };
       return { tasksList: [...state.tasksList, updatedTasksList] };
     }),

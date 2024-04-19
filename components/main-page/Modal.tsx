@@ -1,7 +1,22 @@
 import FocusLock from 'react-focus-lock';
 import clsx from 'clsx';
+import { FC, MouseEvent, ReactNode } from 'react';
 
-export function Modal({
+export interface ModalProps {
+  isOpen: boolean;
+  children: ReactNode;
+  height?: string;
+  width?: string;
+  inset?: string;
+  insetX?: string;
+  insetY?: string;
+  buttonCancel?: string;
+  buttonAgree?: string;
+  setIsOpen: (isOpen: boolean) => void;
+  onAgree?: () => void;
+}
+
+export const Modal: FC<ModalProps> = ({
   isOpen, // флаг открытия/закрытия
   setIsOpen, // установка флага открытия/закрытия
   children, // дочерний элемент для контента модалки
@@ -13,10 +28,11 @@ export function Modal({
   buttonAgree, // Кпопка согласия
   buttonCancel, // Кпопка отмены
   onAgree, // Логика отправки согласия
-}) {
+}) => {
   // Закрытие модального окна при клике вне его
-  function closeModal(event) {
-    if (event.target.classList.contains('modal')) {
+  function closeModal(event: MouseEvent<HTMLDivElement>) {
+    const target = event.target as HTMLDivElement;
+    if (target.classList.contains('modal')) {
       setIsOpen(false);
     }
   }
@@ -37,7 +53,7 @@ export function Modal({
             if (event.key === 'Escape') {
               setIsOpen(false);
             } else if (event.key === 'Enter') {
-              onAgree();
+              onAgree?.();
             }
           }}
         >
@@ -61,4 +77,4 @@ export function Modal({
       </div>
     )
   );
-}
+};

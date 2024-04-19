@@ -1,9 +1,10 @@
 import { create } from 'zustand';
+import { IIdsState } from './store-interface';
 
 // Хранилище id
-export const useIdsStorage = create((set) => ({
+export const useIdsStorage = create<IIdsState>((set) => ({
   currentSectionId: null, // хранит id раздела,
-  currentSubSectionId: null, // хранит id подраздела,
+  currentSubSectionId: null, // хранит id поtдраздела,
   currentTaskId: null, // хранит id задачи,
 
   // Устанавливает id раздела

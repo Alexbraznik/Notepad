@@ -1,22 +1,20 @@
-import { useCollection } from '../store/useCollection';
-import { useIdsStorage } from '../store/useIdsStorage';
+import { FC } from 'react';
+import { useCollection, useIdsStorage } from '../store';
+import { ISectionHeaderProps } from './interfaces/collection-interfaces';
 
 // Название раздела
-export function SectionHeader({
+export const SectionHeader: FC<ISectionHeaderProps> = ({
   section,
   setActiveSectionId,
   setIsNewSubSection,
-}) {
+}) => {
   const currentSectionId = useIdsStorage((state) => state.currentSectionId);
-  const setCurrentSubSectionId = useIdsStorage(
-    (state) => state.setCurrentSubSectionId,
-  );
-
+  const setCurrentSubSectionId = useIdsStorage((state) => state.setCurrentSubSectionId);
   const deleteSection = useCollection((state) => state.deleteSection);
 
   return (
     <div className="flex mb-1 justify-between items-center gap-4">
-      <span className="truncate h-5">{section.name}</span>
+      <span className="truncate h-5">{section.title}</span>
       <div className="text-xl flex gap-3 mr-2">
         <>
           <span
@@ -43,4 +41,4 @@ export function SectionHeader({
       </div>
     </div>
   );
-}
+};

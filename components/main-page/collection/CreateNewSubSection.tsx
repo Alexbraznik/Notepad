@@ -1,9 +1,13 @@
+import { FC, useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
-import { useState } from 'react';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../store';
+import { ICreateNewSubSectionProps } from './interfaces/collection-interfaces';
 
 // Создает Input для названия нового подраздела
-export function CreateNewSubSection({ setIsNewSubSection, activeSectionId }) {
+export const CreateNewSubSection: FC<ICreateNewSubSectionProps> = ({
+  setIsNewSubSection,
+  activeSectionId,
+}) => {
   const [newSubSectionText, setNewSubSectionText] = useState(''); // текст новой подкатегории
 
   const addNewSubSection = useCollection((state) => state.addNewSubSection);
@@ -51,4 +55,4 @@ export function CreateNewSubSection({ setIsNewSubSection, activeSectionId }) {
       </div>
     </>
   );
-}
+};

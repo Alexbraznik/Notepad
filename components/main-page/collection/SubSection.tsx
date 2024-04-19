@@ -1,14 +1,16 @@
 import clsx from 'clsx';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../store';
+import { FC } from 'react';
+import { ISubSectionProps } from './interfaces/collection-interfaces';
 
 // Дочерний элемент Section. Отвечает за подразделы
-export function SubSection({
+export const SubSection: FC<ISubSectionProps> = ({
   sectionId,
   subSection,
   setCurrentSectionId,
   setCurrentSubSectionId,
   currentSubSectionId,
-}) {
+}) => {
   const deleteSubSection = useCollection((state) => state.deleteSubSection);
 
   return (
@@ -39,4 +41,4 @@ export function SubSection({
       </small>
     </li>
   );
-}
+};

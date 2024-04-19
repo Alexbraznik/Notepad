@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { SectionHeader, SubSection, CreateNewSubSection } from './index';
-import { useCollection } from '../store/useCollection';
-import { useIdsStorage } from '../store/useIdsStorage';
+import { useCollection, useIdsStorage } from '../store';
+import { ISectionProps } from './interfaces/collection-interfaces';
 
 // Дочерний элемент Collection, контейнер подразделов и пр.
-export function Section({ section }) {
+export const Section: FC<ISectionProps> = ({ section }) => {
   const [isNewSubSection, setIsNewSubSection] = useState(false); // флаг создания нового подраздела
-  const [activeSectionId, setActiveSectionId] = useState(null); // id активной секции
+  const [activeSectionId, setActiveSectionId] = useState<number | null>(null); // id активной секции
 
   const sectionList = useCollection((state) => state.sectionList);
   const subSectionList = useCollection((state) => state.subSectionList);
@@ -55,4 +55,4 @@ export function Section({ section }) {
       </div>
     </div>
   );
-}
+};

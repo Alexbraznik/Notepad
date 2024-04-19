@@ -1,9 +1,15 @@
-import { useBoard } from '../store/useBoard';
-import { useIdsStorage } from '../store/useIdsStorage';
-import { TrashIcon } from './TrashIcon';
+import { FC } from 'react';
+import { useBoard, useIdsStorage } from '../store';
+import { TrashIcon } from './index';
+import { IBoardItemProps } from './interfaces/board-interfaces';
 
 // Отдельный один элемент списка задач
-export function BoardItem({ setIsOpen, setModalText, id, title }) {
+export const BoardItem: FC<IBoardItemProps> = ({
+  setIsOpen,
+  setModalText,
+  id,
+  title,
+}) => {
   const deleteTask = useBoard((state) => state.deleteTask);
   const setCurrentTaskId = useIdsStorage((state) => state.setCurrentTaskId);
 
@@ -25,4 +31,4 @@ export function BoardItem({ setIsOpen, setModalText, id, title }) {
       />
     </div>
   );
-}
+};
