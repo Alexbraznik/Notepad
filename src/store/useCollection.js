@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { sectionList, subSectionList } from '../constatns';
+import { sectionList, subSectionList } from '../components/main-page/constatns';
 import { useBoard } from './useBoard';
 import uniqid from 'uniqid';
 

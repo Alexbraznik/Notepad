@@ -1,5 +1,5 @@
-import { Board } from './board//Board';
-import { Collection } from './collection//Collection';
+import { Board } from './board/Board';
+import { Collection } from './collection/Collection';
 
 export default function MainPage() {
   return (

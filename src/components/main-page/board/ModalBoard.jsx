@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { useBoard } from '../store/useBoard';
+import { useBoard } from '../../../store/useBoard';
 import { Modal } from '../Modal';
 
 export function ModalBoard({ isOpen, setIsOpen, modalText, setModalText }) {

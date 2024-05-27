@@ -1,6 +1,6 @@
 import { FaCheck } from 'react-icons/fa6';
 import { useState } from 'react';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../../../store/useCollection';
 
 // Создает Input для названия нового подраздела
 export function CreateNewSubSection({ setIsNewSubSection, activeSectionId }) {

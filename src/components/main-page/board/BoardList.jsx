@@ -1,5 +1,5 @@
-import { useBoard } from '../store/useBoard';
-import { useIdsStorage } from '../store/useIdsStorage';
+import { useBoard } from '../../../store/useBoard';
+import { useIdsStorage } from '../../../store/useIdsStorage';
 import { BoardItem } from './BoardItem';
 
 // Весь список задач. Сравнивается id активного подраздела и в него добавляется задача

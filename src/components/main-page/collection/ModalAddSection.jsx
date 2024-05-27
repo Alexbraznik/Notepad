@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../../../store/useCollection';
 import { Modal } from '../Modal';
 
 export function ModalAddSection({ isOpen, setIsOpen }) {

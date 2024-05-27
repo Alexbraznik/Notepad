@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { SectionHeader, SubSection, CreateNewSubSection } from './index';
-import { useCollection } from '../store/useCollection';
-import { useIdsStorage } from '../store/useIdsStorage';
+import { useCollection } from '../../../store/useCollection';
+import { useIdsStorage } from '../../../store/useIdsStorage';
 
 // Дочерний элемент Collection, контейнер подразделов и пр.
 export function Section({ section }) {

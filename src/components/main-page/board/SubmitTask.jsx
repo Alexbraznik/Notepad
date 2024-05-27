@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useBoard } from '../store/useBoard';
+import { useBoard } from '../../../store/useBoard';
 
 // Отправка задачи в boardList
 export function SubmitTask() {

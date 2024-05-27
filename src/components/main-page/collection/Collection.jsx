@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../../../store/useCollection';
 
 import { ModalAddSection } from './ModalAddSection';
 import { Section } from './Section';

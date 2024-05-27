@@ -1,5 +1,5 @@
-import { useBoard } from '../store/useBoard';
-import { useIdsStorage } from '../store/useIdsStorage';
+import { useBoard } from '../../../store/useBoard';
+import { useIdsStorage } from '../../../store/useIdsStorage';
 import { TrashIcon } from './TrashIcon';
 
 // Отдельный один элемент списка задач
