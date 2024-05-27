@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { tasksList } from '../constatns';
+import { tasksList } from '../components/main-page/constatns';
 import { useIdsStorage } from './useIdsStorage';
 import uniqid from 'uniqid';
 

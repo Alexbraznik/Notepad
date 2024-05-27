@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCollection } from '../store/useCollection';
+import { useCollection } from '../../../store/useCollection';
 
 // Дочерний элемент Section. Отвечает за подразделы
 export function SubSection({
