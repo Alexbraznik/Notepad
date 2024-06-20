@@ -14,7 +14,7 @@ https://notepad-eight-xi.vercel.app/
 
 Установите зависимость Next.js:
 
-`npm install next@latest react@latest react-dom@latest`
+`npm install`
 
 ## Запуск
 
